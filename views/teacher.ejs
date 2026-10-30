@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head><%- include('partials/head', { title }) %></head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <a class="brand" href="/"><span class="logo">E</span><span>EduFlow</span></a>
+            <a class="side-link active" href="/teacher">📚 My Courses</a>
+            <a class="side-link" href="#students-section">🎓 Students</a>
+        </aside>
+
+        <main class="main">
+            <div class="topbar">
+                <h1>Teacher Dashboard</h1>
+                <div class="user-chip">
+                    <span class="avatar">
+                        <%= user.name[0].toUpperCase() %>
+                    </span>
+                    <div>
+                        <div style="font-weight:600">
+                            <%= user.name %>
+                        </div>
+                        <div style="font-size:11px;color:var(--muted)">teacher</div>
+                    </div>
+                    <button class="btn btn-ghost btn-sm" id="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <section class="stats">
+                <div class="stat">
+                    <div class="label">My courses</div>
+                    <div class="value">
+                        <%= stats.myCourses %>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="label">Active students</div>
+                    <div class="value">
+                        <%= stats.activeStudents %>
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="label">Total students</div>
+                    <div class="value">
+                        <%= stats.totalStudents %>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom:32px">
+                <h2 style="font-size:18px;margin-bottom:12px;letter-spacing:-.01em">My Courses</h2>
+                <% if (!courses.length) { %>
+                    <div class="table-wrap" style="padding:32px;text-align:center;color:var(--muted)">
+                        You haven't been assigned any courses yet. Contact an administrator.
+                    </div>
+                    <% } else { %>
+                        <div class="grid">
+                            <% courses.forEach((c)=> { %>
+                                <article class="card">
+                                    <div
+                                        style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+                                        <span class="badge"
+                                            style="background:#eef2ff;color:var(--primary);font-family:ui-monospace,monospace">
+                                            <%= c.code %>
+                                        </span>
+                                        <span style="font-size:12px;color:var(--muted)">
+                                            <%= c.credits %> credits
+                                        </span>
+                                    </div>
+                                    <h3>
+                                        <%= c.name %>
+                                    </h3>
+                                    <p>
+                                        <%= c.description || 'No description.' %>
+                                    </p>
+                                </article>
+                                <% }) %>
+                        </div>
+                        <% } %>
+            </section>
+
+            <section id="students-section">
+                <div class="toolbar">
+                    <h2 style="font-size:18px;letter-spacing:-.01em;flex:0">Student Roster</h2>
+                    <input id="search" placeholder="Search students...">
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Grade</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="students-body">
+                            <% if (!students.length) { %>
+                                <tr>
+                                    <td colspan="5" class="empty">No students found.</td>
+                                </tr>
+                                <% } %>
+                                    <% students.forEach((s)=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= s.first_name %>
+                                                    <%= s.last_name %>
+                                            </td>
+                                            <td>
+                                                <%= s.email %>
+                                            </td>
+                                            <td>
+                                                <%= s.grade_level ?? '—' %>
+                                            </td>
+                                            <td><span class="badge badge-<%= s.status %>">
+                                                    <%= s.status %>
+                                                </span></td>
+                                            <td style="text-align:right">
+                                                <button class="btn btn-ghost btn-sm"
+                                                    data-view-id="<%= s.id %>">View</button>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="view-modal">
+        <div class="modal">
+            <h2 id="view-title">Student details</h2>
+            <div id="view-body" style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+                <p style="color:var(--muted)">Loading...</p>
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-top:16px">
+                <button type="button" class="btn btn-ghost" id="view-close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <script>
+        window.__USER__ = <% - JSON.stringify(user) %>;
+    </script>
+    <script type="module" src="/js/teacher.js"></script>
+</body>
+
+</html>

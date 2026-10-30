@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head><%- include('partials/head', { title }) %></head>
+
+<body>
+    <%- include('partials/nav', { user }) %>
+
+        <main>
+            <section class="hero">
+                <div class="blob b1"></div>
+                <div class="blob b2"></div>
+                <div class="container">
+                    <span class="pill">✦ Now with role-based access</span>
+                    <h1>The <span class="grad">smarter way</span><br>to manage your school.</h1>
+                    <p class="sub">EduFlow brings students, teachers, and administrators together in one beautifully
+                        simple platform. Less paperwork, more learning.</p>
+                    <div class="hero-cta">
+                        <% if (user) { %>
+                            <a class="btn btn-primary btn-lg" href="/dashboard">Open dashboard →</a>
+                            <% } else { %>
+                                <a class="btn btn-primary btn-lg" href="/register">Start free →</a>
+                                <a class="btn btn-ghost btn-lg" href="#features">See features</a>
+                                <% } %>
+                    </div>
+                    <div class="hero-stats">
+                        <div><strong>10k+</strong><span>students managed</span></div>
+                        <div><strong>500+</strong><span>schools</span></div>
+                        <div><strong>99.9%</strong><span>uptime</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features" id="features">
+                <div class="container">
+                    <h2>Everything you need.<br>Nothing you don't.</h2>
+                    <div class="grid">
+                        <article class="card">
+                            <div class="icon">👥</div>
+                            <h3>Student records</h3>
+                            <p>Centralize every student profile with search, filters, and instant updates.</p>
+                        </article>
+                        <article class="card">
+                            <div class="icon">🔐</div>
+                            <h3>Role-based access</h3>
+                            <p>Admins manage everything. Teachers view. Students see only their own data.</p>
+                        </article>
+                        <article class="card">
+                            <div class="icon">📚</div>
+                            <h3>Course catalog</h3>
+                            <p>Track course codes, credits, and teachers in one clean view.</p>
+                        </article>
+                        <article class="card">
+                            <div class="icon">⚡</div>
+                            <h3>Instant search</h3>
+                            <p>Find any student by name or email in milliseconds.</p>
+                        </article>
+                        <article class="card">
+                            <div class="icon">🎨</div>
+                            <h3>Modern UI</h3>
+                            <p>A clean, responsive interface built for speed and clarity.</p>
+                        </article>
+                        <article class="card">
+                            <div class="icon">🔒</div>
+                            <h3>Secure by default</h3>
+                            <p>JWT in httpOnly cookies + bcrypt-hashed passwords.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">© 2025 EduFlow. Built with Express + EJS + SQLite.</div>
+        </footer>
+</body>
+
+</html>

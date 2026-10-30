@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head><%- include('partials/head', { title }) %></head>
+
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <a class="brand" href="/" style="margin-bottom:24px;display:inline-flex">
+                <span class="logo">E</span><span>EduFlow</span>
+            </a>
+            <h1>
+                <%= mode==='login' ? 'Welcome back' : 'Create your account' %>
+            </h1>
+            <p class="sub">
+                <%= mode==='login' ? 'Sign in to your account.' : 'It takes 10 seconds.' %>
+            </p>
+
+            <div class="tabs">
+                <a href="/login" class="<%= mode === 'login'    ? 'active' : '' %>">Sign in</a>
+                <a href="/register" class="<%= mode === 'register' ? 'active' : '' %>">Register</a>
+            </div>
+
+            <% if (error) { %>
+                <div class="alert alert-error">
+                    <%= error %>
+                </div>
+                <% } %>
+
+                    <% if (mode==='login' ) { %>
+                        <form method="POST" action="/login">
+                            <div class="field"><label>Email</label><input name="email" type="email" required autofocus>
+                            </div>
+                            <div class="field"><label>Password</label><input name="password" type="password" required>
+                            </div>
+                            <button class="btn btn-primary btn-block btn-lg" type="submit">Sign in</button>
+                            <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:16px">
+                                Demo admin: <code>admin@school.local</code> / <code>admin123</code>
+                            </p>
+                        </form>
+                        <% } else { %>
+                            <form method="POST" action="/register">
+                                <div class="field"><label>Full name</label><input name="name" required autofocus></div>
+                                <div class="field"><label>Email</label><input name="email" type="email" required></div>
+                                <div class="field"><label>Password</label><input name="password" type="password"
+                                        minlength="6" required></div>
+                                <button class="btn btn-primary btn-block btn-lg" type="submit">Create account</button>
+                            </form>
+                            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

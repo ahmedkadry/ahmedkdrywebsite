@@ -1,0 +1,18 @@
+<% if (flash.success.length || flash.error.length) { %>
+    <div class="toast-container">
+        <% flash.success.forEach((m)=> { %>
+            <div class="toast toast-success show">
+                <span class="toast-icon">✓</span><span class="toast-msg">
+                    <%= m %>
+                </span>
+            </div>
+            <% }) %>
+                <% flash.error.forEach((m)=> { %>
+                    <div class="toast toast-error show">
+                        <span class="toast-icon">✕</span><span class="toast-msg">
+                            <%= m %>
+                        </span>
+                    </div>
+                    <% }) %>
+    </div>
+    <% } %>

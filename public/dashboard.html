@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard — EduFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <a class="brand" href="/"><span class="logo">E</span><span>EduFlow</span></a>
+            <a class="side-link active" href="/dashboard">📊 Dashboard</a>
+            <a class="side-link" href="#students" data-require="admin,teacher">🎓 Students</a>
+        </aside>
+
+        <main class="main">
+            <div class="topbar">
+                <h1>Dashboard</h1>
+                <div class="user-chip">
+                    <span class="avatar" id="user-avatar">?</span>
+                    <div>
+                        <div style="font-weight:600" id="user-name">—</div>
+                        <div style="font-size:11px;color:var(--muted);text-transform:capitalize" id="user-role">—</div>
+                    </div>
+                    <button class="btn btn-ghost btn-sm" id="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <section class="stats" data-require="admin,teacher">
+                <div class="stat">
+                    <div class="label">Total students</div>
+                    <div class="value" id="stat-students">—</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Active</div>
+                    <div class="value" id="stat-active">—</div>
+                </div>
+                <div class="stat">
+                    <div class="label">Courses</div>
+                    <div class="value" id="stat-courses">—</div>
+                </div>
+            </section>
+
+            <section id="students-section" data-require="admin,teacher">
+                <div class="toolbar">
+                    <input id="search" placeholder="Search by name or email...">
+                    <button class="btn btn-primary" id="add-student-btn" data-require="admin">+ Add student</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Grade</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="students-body">
+                            <tr>
+                                <td colspan="5" style="text-align:center;padding:40px;color:var(--muted)">Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="own-profile" data-require="student"></section>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-backdrop" id="student-modal">
+        <div class="modal">
+            <h2 id="modal-title">Add student</h2>
+            <form id="student-form">
+                <div class="row">
+                    <div class="field"><label>First name</label><input name="first_name" required></div>
+                    <div class="field"><label>Last name</label><input name="last_name" required></div>
+                </div>
+                <div class="field"><label>Email</label><input name="email" type="email" required></div>
+                <div class="row">
+                    <div class="field"><label>Phone</label><input name="phone"></div>
+                    <div class="field"><label>Grade level</label><input name="grade_level" placeholder="e.g. 10"></div>
+                </div>
+                <div class="row">
+                    <div class="field"><label>Date of birth</label><input name="date_of_birth" type="date"></div>
+                    <div class="field">
+                        <label>Status</label>
+                        <select name="status">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="graduated">Graduated</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+                    <button type="button" class="btn btn-ghost" id="modal-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="/js/dashboard.js"></script>
+</body>
+
+</html>
