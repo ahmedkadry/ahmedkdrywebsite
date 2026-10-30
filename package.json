@@ -9,13 +9,15 @@
   "dependencies": {
     "@libsql/client": "^0.18.0",
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "ejs": "^7.0.2",
     "express": "^4.19.0",
+    "express-session": "^1.19.0",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
-    "sqlite3": "^6.0.1",
-    "node": "20.x"
+    "node": "20.x",
+    "sqlite3": "^6.0.1"
   },
   "devDependencies": {
     "dotenv": "^18.0.9",
